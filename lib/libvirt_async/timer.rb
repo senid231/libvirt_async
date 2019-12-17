@@ -28,6 +28,14 @@ module LibvirtAsync
         @fiber.resume(Cancelled.new) if @fiber&.alive?
         @fiber = nil
       end
+
+      def to_s
+        "#<#{self.class}:0x#{object_id.to_s(16)} fiber=#{@fiber.&object_id&.to_s(16)} alive=#{@fiber&.alive?}>"
+      end
+
+      def inspect
+        to_s
+      end
     end
 
     include WithDbg
@@ -89,6 +97,14 @@ module LibvirtAsync
 
       @monitor.close
       @monitor = nil
+    end
+
+    def to_s
+      "#<#{self.class}:0x#{object_id.to_s(16)} timer_id=#{timer_id} interval=#{interval} last_fired=#{last_fired} monitor=#{monitor}>"
+    end
+
+    def inspect
+      to_s
     end
 
     private

@@ -14,6 +14,14 @@ module LibvirtAsync
       def readiness
         monitor&.readiness
       end
+
+      def to_s
+        "#<#{self.class}:0x#{object_id.to_s(16)} readable=#{@readable&.object_id&.to_s(16)} writable=#{@writable&.object_id&.to_s(16)} alive=#{@monitor && !@monitor.closed?}>"
+      end
+
+      def inspect
+        to_s
+      end
     end
 
     include WithDbg
@@ -92,6 +100,14 @@ module LibvirtAsync
 
       @monitor.close
       @monitor = nil
+    end
+
+    def to_s
+      "#<#{self.class}:0x#{object_id.to_s(16)} handle_id=#{handle_id} fd=#{fd} events=#{events} monitor=#{monitor}>"
+    end
+
+    def inspect
+      to_s
     end
 
     private

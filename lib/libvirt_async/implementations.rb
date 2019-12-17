@@ -29,6 +29,27 @@ module LibvirtAsync
       default_variables
     end
 
+    def print_debug_info
+      str = [
+          "#{self.class}:0x#{object_id.to_s(16)}",
+          "handles = [",
+          @handles.map(&:to_s).join("\n"),
+          "]",
+          "timers = [",
+          @timers.map(&:to_s).join("\n"),
+          "]"
+      ].join("\n")
+      LibvirtAsync.logger&.debug { str }
+    end
+
+    def to_s
+      "#<#{self.class}:0x#{object_id.to_s(16)} handles=#{@handles} timers=#{@timers}>"
+    end
+
+    def inspect
+      to_s
+    end
+
     private
 
     def default_variables

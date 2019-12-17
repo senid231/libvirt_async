@@ -35,11 +35,9 @@ module LibvirtAsync
 
   module_function :logger
 
-  def build_logger(io, formatter: nil, progname: nil, level: nil, datetime_format: nil)
+  def build_logger(io, formatter: LogFormatter.new, progname: nil, level: :info, datetime_format: nil)
+    formatter&.datetime_format = datetime_format unless datetime_format.nil?
     logger = Logger.new(io, formatter: formatter, progname: progname, level: level)
-    logger.level = level unless level.nil?
-    logger.formatter = formatter || LogFormatter.new
-    logger.formatter.datetime_format = datetime_format unless datetime_format.nil?
     logger
   end
 
@@ -50,4 +48,30 @@ module LibvirtAsync
   end
 
   module_function :use_logger!
+
+  def start_debug_logging!(timeout = 2)
+    LibvirtAsync.logger.debug { "scheduling debug logging!" }
+    @debug_task = Util.create_task do
+      LibvirtAsync.logger.debug { "starting debug logging!" }
+      begin
+        while true do
+          raise Error, 'implementations not registered' if @implementations.nil?
+          @implementations.print_debug_info
+          Async::Task.current.reactor.sleep timeout
+        end
+      rescue Error => e
+        LibvirtAsync.logger.debug { "stopping debug logging! #{e.message}" }
+      end
+    end
+    Async::Task.current.reactor << @debug_task.fiber
+  end
+
+  module_function :start_debug_logging!
+
+  def stop_debug_logging!
+    @debug_task&.stop(true)
+    @debug_task = nil
+  end
+
+  module_function :stop_debug_logging!
 end
