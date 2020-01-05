@@ -1,11 +1,13 @@
 # Changelog
 
 ## Unreleased
+- Add StreamRead for working with non-block streams in read mode
+- Improve README
 
 ## 0.1.1
-- fix async tasks hierarchy
+- Fix async tasks hierarchy
 
 ## 0.1.0
 
-- register implementations
-- debug logging
+- Register implementations
+- Debug logging

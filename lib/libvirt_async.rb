@@ -2,6 +2,7 @@ require 'libvirt_async/version'
 require 'libvirt_async/error'
 require 'libvirt_async/log_formatter'
 require 'libvirt_async/implementations'
+require 'libvirt_async/stream_read'
 
 module LibvirtAsync
   def register_implementations!
