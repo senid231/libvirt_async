@@ -1,3 +1,4 @@
+require 'logger'
 require 'libvirt_async/version'
 require 'libvirt_async/error'
 require 'libvirt_async/log_formatter'
@@ -38,8 +39,7 @@ module LibvirtAsync
 
   def build_logger(io, formatter: LogFormatter.new, progname: nil, level: :info, datetime_format: nil)
     formatter&.datetime_format = datetime_format unless datetime_format.nil?
-    logger = Logger.new(io, formatter: formatter, progname: progname, level: level)
-    logger
+    ::Logger.new(io, formatter: formatter, progname: progname, level: level)
   end
 
   module_function :build_logger
