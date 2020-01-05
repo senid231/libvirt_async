@@ -147,6 +147,7 @@ require 'libvirt_async'
 
 LibvirtAsync.use_logger!
 LibvirtAsync.logger.level = Logger::Severity::DEBUG # for debugging
+LibvirtAsync.start_debug_logging!(2) # will print implementations debug info to logger each 2 seconds. 
 ```
 
 Look at [ruby-libvirt Documenation](https://libvirt.org/ruby/documentation.html) for further details.
