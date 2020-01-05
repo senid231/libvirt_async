@@ -36,7 +36,7 @@ module LibvirtAsync
     end
 
     def add_callback(block)
-      raise ArgumentError, 'block must be a Proc' unless @callback.is_a?(Proc)
+      raise ArgumentError, 'block must be a Proc' unless block.is_a?(Proc)
       @callback = block
     end
 
