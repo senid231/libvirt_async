@@ -119,7 +119,7 @@ module LibvirtAsync
       end
 
       dbg { "#{self.class}#dispatch invokes fiber=0x#{task.fiber.object_id.to_s(16)} timer_id=#{timer_id}, interval=#{interval}" }
-      task.run
+      task.reactor << task.fiber
 
       dbg { "#{self.class}#dispatch ends timer_id=#{timer_id}, interval=#{interval}" }
     end

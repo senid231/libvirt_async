@@ -63,12 +63,12 @@ module LibvirtAsync
       dbg { "#{self.class}#register_implementations" }
 
       Libvirt::Event.register(
-          method(:add_handle).to_proc,
-          method(:update_handle).to_proc,
-          method(:remove_handle).to_proc,
-          method(:add_timer).to_proc,
-          method(:update_timer).to_proc,
-          method(:remove_timer).to_proc
+          add_handle: method(:add_handle).to_proc,
+          update_handle: method(:update_handle).to_proc,
+          remove_handle: method(:remove_handle).to_proc,
+          add_timer: method(:add_timer).to_proc,
+          update_timer: method(:update_timer).to_proc,
+          remove_timer: method(:remove_timer).to_proc
       )
     end
 
