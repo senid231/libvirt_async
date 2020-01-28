@@ -62,7 +62,7 @@ module LibvirtAsync
     def register_implementations
       dbg { "#{self.class}#register_implementations" }
 
-      Libvirt::event_register_impl(
+      Libvirt::Event.register(
           method(:add_handle).to_proc,
           method(:update_handle).to_proc,
           method(:remove_handle).to_proc,

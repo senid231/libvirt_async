@@ -2,7 +2,7 @@ module LibvirtAsync
   class Handle
     # Represents an event handle (usually a file descriptor).  When an event
     # happens to the handle, we dispatch the event to libvirt via
-    # Libvirt::event_invoke_handle_callback (feeding it the handle_id we returned
+    # Libvirt::Event.invoke_handle_callback (feeding it the handle_id we returned
     # from add_handle, the file descriptor, the new events, and the opaque
     # data that libvirt gave us earlier).
 
@@ -117,7 +117,7 @@ module LibvirtAsync
 
       task = Util.create_task do
         dbg { "#{self.class}#dispatch async starts handle_id=#{handle_id} events=#{events}, fd=#{fd}" }
-        Libvirt::event_invoke_handle_callback(handle_id, fd, events, opaque)
+        Libvirt::Event.invoke_handle_callback(handle_id, fd, events, opaque)
         dbg { "#{self.class}#dispatch async ends handle_id=#{handle_id} received_events=#{events}, fd=#{fd}" }
       end
       dbg { "#{self.class}#dispatch invokes fiber=0x#{task.fiber.object_id.to_s(16)} handle_id=#{handle_id}, events=#{events}, fd=#{fd}" }

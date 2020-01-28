@@ -1,7 +1,7 @@
 module LibvirtAsync
   class Timer
     # Represents a   When a timer expires, we dispatch the event to
-    # libvirt via Libvirt::event_invoke_timeout_callback (feeding it the timer_id
+    # libvirt via Libvirt::Event.invoke_timeout_callback (feeding it the timer_id
     # we returned from add_timer and the opaque data that libvirt gave us
     # earlier).
 
@@ -114,7 +114,7 @@ module LibvirtAsync
 
       task = Util.create_task do
         dbg { "#{self.class}#dispatch async starts timer_id=#{timer_id}, interval=#{interval}" }
-        Libvirt::event_invoke_timeout_callback(timer_id, opaque)
+        Libvirt::Event.invoke_timeout_callback(timer_id, opaque)
         dbg { "#{self.class}#dispatch async async ends timer_id=#{timer_id}, interval=#{interval}" }
       end
 
