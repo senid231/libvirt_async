@@ -44,10 +44,11 @@ module LibvirtAsync
       raise ArgumentError, 'block must be given' if @callback.nil?
 
       dbg { "#{to_s}#call event_add_callback calling" }
+      proc = -> (_stream, events, _opaque) { stream_callback(events) }
       @cb_opaque = stream.event_add_callback(
           Libvirt::Stream::EVENT_READABLE,
-          -> (_stream, events, _opaque) { stream_callback(events) },
-          self
+          self,
+          &proc
       )
       dbg { "#{to_s}#call event_add_callback called" }
 
