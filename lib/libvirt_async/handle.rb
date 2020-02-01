@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LibvirtAsync
   class Handle
     # Represents an event handle (usually a file descriptor).  When an event

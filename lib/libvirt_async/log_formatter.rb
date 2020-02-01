@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LibvirtAsync
   class LogFormatter
     LOG_FORMAT = "%s, %s [%d/%s/%s] %s\n".freeze

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'async'
 require 'libvirt_async/with_dbg'
 require 'libvirt_async/util'

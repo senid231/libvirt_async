@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LibvirtAsync
   class Timer
     # Represents a   When a timer expires, we dispatch the event to

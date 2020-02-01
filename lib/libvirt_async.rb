@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'logger'
 require 'libvirt_async/version'
 require 'libvirt_async/error'
