@@ -46,8 +46,8 @@ module LibvirtAsync
 
   module_function :build_logger
 
-  def use_logger!(io = STDOUT, options = {})
-    self.logger = build_logger(io, options)
+  def use_logger!(io = STDOUT, **options)
+    self.logger = build_logger(io, **options)
   end
 
   module_function :use_logger!
